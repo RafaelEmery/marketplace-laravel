@@ -13,10 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $helloWorld = 'Hello World!';
-    return view('welcome', ['first' => $helloWorld]);
-})->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function(){
     Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
