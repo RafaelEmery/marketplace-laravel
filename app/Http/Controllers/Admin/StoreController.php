@@ -13,16 +13,20 @@ class StoreController extends Controller
     use UploadTrait;
 
     public function __construct(){
+
+        // Executando somente para alguns 
         $this->middleware('user.has.store')->only(['create','store']);
     }
 
     public function index(){
         $store = auth()->user()->store;
+
         return view('admin.stores.index', compact('store'));
     }
 
     public function create(){
         $users = \App\User::all(['id','name']);
+
         return view('admin.stores.create', compact('users'));
     }
 
@@ -35,6 +39,7 @@ class StoreController extends Controller
         }
 
         $store = $user->store()->create($data);
+        
         flash('Loja criada com sucesso')->success();
         return redirect()->route('admin.stores.index');
     }

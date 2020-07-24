@@ -6,12 +6,15 @@
         @csrf
         <div class="form-group">
             <label>Nome do Produto</label>
+            {{-- Usando o is-invalid e old('name') para fazer a validação no form --}}
             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{old('name')}}">
+            
+            {{-- Exibindo as mensagens de erro abaixo do input --}}
             @error('name')
             <div class="invalid-feedback">
                 {{$message}}
             </div>
-            @enderror
+            @enderror   
         </div>
         <div class="form-group">
             <label>Descrição</label>

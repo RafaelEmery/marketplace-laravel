@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
+
 Route::get('/', 'HomeController@index')->name('home');
+
 Route::get('/product/{slug}', 'HomeController@single')->name('product.single');
+
 Route::prefix('cart')->name('cart.')->group(function(){
     Route::get('/', 'CartController@index')->name('index');
     Route::post('add', 'CartController@add')->name('add');
@@ -36,4 +41,3 @@ Route::group(['middleware' => ['auth']], function(){
     });
 });
 
-Auth::routes();
